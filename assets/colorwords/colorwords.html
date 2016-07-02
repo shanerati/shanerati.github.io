@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <title>ColorWords</title>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <style>
+        .passage {
+            font-family: 'Raleway', sans-serif;
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+    {% for i in passages %}
+    {{ passages[i]}}
+    {% endfor %}
+
+<clipPath id="CP">
+<rect width="500" height="50"/>
+</clipPath>
+
+</body>
+<script>
+
+var passages = {{passages}};
+
+var width = 800,
+    height = 1000,
+    barheight = height * 11 / 12 / (d3.entries(passages).length);
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("clipPath").attr("id","CP").append("rect").attr("width",width).attr("height",barheight);
+
+var g = svg.selectAll("g")
+    .data(d3.entries(passages))
+    .enter()
+    .append("g")
+    .attr("transform", function(d,i) { return "translate(0," + i*barheight + ")"; });
+
+//    g.append("rect").attr("width",width).attr("height",barheight).attr("fill",function(d) { return d.value[1] })
+    g.append("rect").attr("width",width).attr("height",barheight)
+//            .attr("fill",function(d) { return "hsl("+d.value[1][0]+","+d.value[1][1]+"%,"+d.value[1][2]+"%)"; })
+            .attr("fill",function(d) {
+                return "hsl("
+                        + (d.value[1][0] + Math.floor(Math.random() * -2) + 2).toString()
+                        + ","
+                        + (d.value[1][1] + Math.floor(Math.random() * -5) + 5).toString()
+                        + "%,"
+                        + (d.value[1][2] + Math.floor(Math.random() * -5) + 5).toString()
+                        + "%)"; })
+//            .attr("stroke",function(d) { return "hsl("+d.value[1][0]+","+d.value[1][1]+"%,"+ ((d.value[1][2]+50)%100)+"%)"; })
+            .attr("stroke",function(d) {
+                return "hsl("
+                        + (d.value[1][0] + Math.floor(Math.random() * -2) + 2).toString()
+                        + ","
+                        + (d.value[1][1] + Math.floor(Math.random() * -5) + 5).toString()
+                        + "%,"
+                        + (d.value[1][2] + Math.floor(Math.random() * -5) + 5).toString()
+                        + "%)"; })
+            .attr("stroke-width",barheight/10)
+            .attr("stroke-opacity",.5)
+            .attr("x",0)
+            .attr("y",0);
+    g.append("text")
+        .text(function(d) {
+            return d.value[0] })
+//            .attr("transform", function() { return "translate(0," + barheight/2 + ")"; })
+            .attr("fill",function(d) {
+                return "hsl("
+                        + (d.value[1][0] + Math.floor(Math.random() * 0) + 0).toString()
+                        + ","
+                        + (d.value[1][1] + Math.floor(Math.random() * 0) + 0).toString()
+                        + "%,"
+                        + ((d.value[1][2]+50)%100 + Math.floor(Math.random() * 0) + 0).toString()
+                        + "%)"; })
+            .attr("font-size",barheight)
+            .attr("opacity",.3)
+            .attr("font-family","'Raleway', sans-serif")
+            .attr("text-anchor","middle")
+            .attr("x",width/2)
+            .attr("y",barheight *.8)
+            .attr("clip-path","url(#CP)");
+
+    var b = svg.append("g")
+        .attr("transform", "translate(0," + d3.entries(passages).length*barheight + ")");
+        b.append("rect").attr("width",width).attr("height",height/12)
+            .attr("fill","#fff")
+//            .attr("stroke",function(d) { return "hsl("+d.value[1][0]+","+d.value[1][1]+"%,"+ ((d.value[1][2]+50)%100)+"%)"; })
+//            .attr("stroke", "#444")
+//            .attr("stroke-width",4)
+//            .attr("stroke-opacity",.5)
+            .attr("x",0)
+            .attr("y",0);
+    b.append("text")
+        .text("{{title}}")
+//            .attr("transform", function() { return "translate(0," + barheight/2 + ")"; })
+//            .attr("fill",function(d) { return "hsl("+d.value[1][0]+","+d.value[1][1]+"%,"+ ((d.value[1][2]+50)%100)+"%)"; })
+            .attr("fill","#444")
+            .attr("font-size",height/30)
+//            .attr("opacity",.3)
+            .attr("font-family","'Raleway', sans-serif")
+            .attr("text-anchor","start")
+            .attr("x",width/3)
+            .attr("y",height/24);
+    b.append("text")
+        .text("{{author}}")
+//            .attr("transform", function() { return "translate(0," + barheight/2 + ")"; })
+//            .attr("fill",function(d) { return "hsl("+d.value[1][0]+","+d.value[1][1]+"%,"+ ((d.value[1][2]+50)%100)+"%)"; })
+            .attr("fill","#666")
+            .attr("font-size",height/30 *.6)
+//            .attr("opacity",.3)
+            .attr("font-family","'Raleway', sans-serif")
+            .attr("text-anchor","start")
+            .attr("x",width/3)
+            .attr("y",height/14);
+    b.append("text")
+        .text("© canonincolour.com")
+//            .attr("transform", function() { return "translate(0," + barheight/2 + ")"; })
+//            .attr("fill",function(d) { return "hsl("+d.value[1][0]+","+d.value[1][1]+"%,"+ ((d.value[1][2]+50)%100)+"%)"; })
+            .attr("fill","#999")
+            .attr("font-size",height/150)
+//            .attr("opacity",.3)
+            .attr("font-family","'Raleway', sans-serif")
+            .attr("text-anchor","start")
+            .attr("x",75)
+            .attr("y",height/15);
+//
+</script>
+</html>

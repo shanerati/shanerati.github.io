@@ -1,0 +1,750 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #606043;
+	color:#F5F3EF;
+    text-shadow: none;
+}
+
+::selection {
+    background: #606043;
+	color:#F5F3EF;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+a {
+	color:#4a5c50;
+	text-decoration:underline;
+}
+a:hover,
+a:focus {
+	color:#606043;
+	text-decoration:none;
+}
+h4 {
+	margin:1em 0 0.4em;
+	font-family:'TradeGothicNextW01-Bold 693232',sans-serif;
+	font-weight:normal;
+	font-size:24px;
+}
+p {
+	margin:0 0 0.6em;
+}
+body {
+	background:#F5F3EF;
+	font-family:'Trade Gothic Next W01',sans-serif;
+	color:#59595b;
+}
+.wrapper {
+	width:1050px;
+	margin:30px auto;
+}
+	h1 {
+		color:#59595b;
+		font-size:65px;
+		margin:0 0 15px;
+		line-height:1em;
+		font-family:'TradeGothicNextW01-BdCm',sans-serif;
+		background-image:url(http://images.richardwestenra.com/rasmussen/title.png);
+		width:661px;
+		height:41px;
+	}
+	header h2 {
+		font-family:'TradeGothicNextW01-Bold 693232',sans-serif;
+		margin:0 0 20px;
+		font-size:1.55em;
+		font-weight:normal;
+	}
+		a.major {
+			text-decoration:none;
+		}
+		a.major:hover,
+		a.major:focus {
+			color:#9d3d38;
+		}
+	#select {
+		position:relative;
+		z-index:2;
+	}
+		#navToggle {
+			border-top:1px solid #d6d5c8;
+			border-bottom:1px solid #d6d5c8;
+			padding:4px 0;
+			color:#495b4d;
+			display:inline-block;
+			outline:none;
+			font-size:20px;
+			font-family:'TradeGothicNextW01-Bold 693232',sans-serif;
+			position:relative;
+			z-index:1;
+			text-decoration:none;
+		}
+		/*#navToggle.active {
+			border-bottom:none;
+			padding:4px 0 0;
+		}*/
+		#navToggle:hover {
+			color:#111;
+		}
+		#navToggle.showCats {
+			display:block;
+		}
+			#navToggle span {
+				display:block;
+				background:#bac2a5;
+				text-transform:uppercase;
+				text-decoration:nne;
+				padding:7px 50px 7px 25px;
+			}
+			#navToggle.showCats span {
+				text-transform:none;
+				display:block;
+			}
+			#navToggle span::after {
+				background:url(http://images.richardwestenra.com/rasmussen/arrows.png) no-repeat 0 0;
+				content:'';
+				display:block;
+				width:15px;
+				height:15px;
+				position:absolute;
+				right:20px;
+				top:20px;
+			}
+			#navToggle.active span::after {
+				background-position: 0 -68px;
+			}
+		#navListContainer {
+			background:#bac2a5;
+			position:relative;
+			z-index:3;
+			top:-5px;
+			display:none;
+		}
+		#navListContainer::after {
+			border-bottom:1px solid #d6d5c8;
+			position:relative;
+			content:'';
+			width:100%;
+			height:3px;
+			background:#F5F3EF;
+			bottom:-3px;
+			display:block;
+		}
+			#navList {
+				margin:0;
+				padding:13px 25px 5px;	
+				-moz-column-count:2;
+				-moz-column-gap:40px;
+				-webkit-column-count:2;
+				-webkit-column-gap:40px;
+				column-count:2;
+				column-gap:40px;
+			}
+				.nl {
+					list-style:none;
+					margin-bottom:5px;
+				}
+					.nl a {
+						outline:none;
+						color:#403f44;
+						background:url(http://images.richardwestenra.com/rasmussen/nl.png) no-repeat 0 3px;
+						padding-left:30px;
+						display:inline-block;
+						text-decoration:none;
+					}
+					.nl a:hover {
+						color:#606043;
+					}
+					.nl a.a {
+						background-position:0 -61px;
+					}
+			#navButtons {
+				clear:both;
+				text-align:right;
+				padding:0 20px 15px;
+				font-weight:bold;
+			}
+				#navButtons a{
+					outline:none;
+					display:inline-block;
+					padding-left:19px;
+				}
+				#resetNav {
+					background:url(http://images.richardwestenra.com/rasmussen/clear.png) no-repeat 0 6px;
+					margin-right:20px;
+					
+				}
+				#doneNav {
+					background:url(http://images.richardwestenra.com/rasmussen/arrows.png) no-repeat 0 -62px;
+				}
+	#quadrantContainer {
+		height:35px;
+		padding-top:10px;
+	}
+		#quadrant {
+			padding:2px 10px 3px;
+			color:rgba(0,0,0,0.6);
+			background:#dce1e0;
+			visibility:hidden;
+			position: relative;
+			z-index:3;
+		}
+		#quadrant.annotationsOn {
+			visibility:visible;
+		}
+			#quadrant h5,
+			#quadrant p {
+				margin:0;
+				font-size:15px;
+				display:inline-block;
+				font-weight:normal;
+			}
+			#quadrant h5 {
+				font-family:'TradeGothicNextW01-Bold 693229',sans-serif;
+			}
+		#annotations,
+		#zoomReset {
+			line-height:1em;
+			position:absolute;
+			top:-30px;
+			right:120px;
+			z-index:1;
+			font-size:13px;
+			line-height:18px;
+			height:18px;
+			outline:none;
+		}
+			#annotations svg {
+				margin:0 3px 0 0;
+				position:relative;
+				top:2px;
+			}
+				#annotations svg polygon {
+					fill:#841414;
+				}
+				#annotations.on svg polygon {
+					fill:#6d7021;
+				}
+		#zoomReset {
+			right:0;
+			padding-left:19px;
+			background:url(http://images.richardwestenra.com/rasmussen/reset.png) 0 2px no-repeat;
+		}
+		#zoomReset:hover {
+			background-position:0 -32px;
+		}
+		
+	#chartContainer {
+		position:relative;
+		clear:both;
+	}
+		#tooltip {
+			position:absolute;
+			top:1px;
+			right:0;
+			padding:15px 20px;
+			width:30%;
+			background:rgba(254,253,245,0.8);
+			color:#616143;
+			height:418px;
+			z-index:1;
+			text-shadow:0 -1px 1px rgba(255,255,255,0.6);
+			-moz-box-shadow:1px 0 0 rgba(0,0,0,0.02) inset;
+			-webkit-box-shadow:1px 0 0 rgba(0,0,0,0.05) inset;
+			-o-box-shadow:1px 0 0 rgba(0,0,0,0.02) inset;
+			box-shadow:1px 0 0 rgba(0,0,0,0.05) inset;
+		}
+		#tooltip.leftPos {
+			left:60px;
+		}
+			#name {
+				font-size:20px;
+				margin:0 0 5px;
+				line-height:1em;
+				font-family:'TradeGothicNextW01-Bold 693229',sans-serif;
+			}
+			#desc {
+				font-size:12px;
+				margin:0 0 10px;
+			}
+			#stats {
+				margin:0;
+				list-style:none;
+				padding:0;
+			}
+				#stats li {
+					margin-bottom:3px;
+				}
+					#stats span {
+						display:block;
+					}
+					.value {
+						border-bottom:1px solid #888;
+						font-size:24px;
+						padding-right:10px;
+						font-family:'TradeGothicNextW01-BdCm',sans-serif;
+					}
+					.high .value {border-bottom-color:#9d3d38;}
+					.medium .value {border-bottom-color:#ca7b43;}
+					.low .value {border-bottom-color:#f9b743;}
+					.negative .value {border-bottom-color:#9bd6d7;}
+					.inactive .value {border-bottom-color:#aaa;}
+					.key {
+						font-weight:normal;
+						font-size:13px;
+					}
+		#chart {
+			height:500px;
+		}
+		svg {
+			font-family:'Trade Gothic Next W01',sans-serif;
+			/*background:rgba(255,255,255,0.3);
+			border:1px solid rgba(255,255,255,0.6);*/
+			position:relative;
+		}
+			path {
+				stroke:red;
+			}
+			rect {
+				fill: transparent;
+				shape-rendering: crispEdges;
+			}
+			.axis {
+			}
+				.axis path,
+				.axis line {
+					fill: none;
+					stroke: rgba(0,0,0,0.1);
+					shape-rendering: crispEdges;
+				}
+				.axis text {
+					font-size: 13px;
+					fill: #666;
+				}
+			.objects {
+				cursor:move;
+			}
+				/*.objects:hover .lineMed {
+					stroke:red;
+					stroke-dasharray:5,5;
+					stroke-width:3px;
+				}*/
+				.axisLine {
+					shape-rendering: crispEdges;
+					stroke:rgba(0,0,0,0.2);
+					stroke-width:2px;
+					fill:none;
+				}
+				.annotationsOn .medianLine {
+					shape-rendering: crispEdges;
+					stroke:rgba(1,71,87,0.4);
+					stroke-width:2px;
+					stroke-dasharray:10,7;
+					fill:none;
+				}
+				.annotationsOn .med {
+					-moz-transition: fill linear 0.2s;
+					-webkit-transition: fill linear 0.2s;
+					-o-transition: fill linear 0.2s;
+					transition: fill linear 0.2s;
+				}
+				.annotationsOn .med:hover {
+					fill:rgba(1,71,87,0.1);
+				}
+				polygon {
+					-moz-transition:fill linear 0.5s;
+					-webkit-transition:fill linear 0.5s;
+					-o-transition:fill linear 0.5s;
+					transition:fill linear 0.5s;
+					cursor:default;
+				}
+				.high {
+					fill:#9d3d38;
+					color:#9d3d38;
+				}
+				.medium {
+					fill:#ca7b43;
+					color:#ca7b43;
+				}
+				.low {
+					fill:#f9b743;
+					color:#e7a42d;
+				}
+				.negative {
+					fill:#9bd6d7;
+					color:#62b5b6;
+				}
+				.inactive {
+					fill:#aaa;
+					opacity:0.15;
+				}
+			.label {
+				font-size:14px;
+				fill:rgba(0,0,0,0.5);
+				shape-rendering:auto;
+			}
+	#zoom {
+		position:absolute;
+		top:30px;
+		right:20px;
+		z-index:5;
+	}
+		#zoom a {
+			background:#fff;
+			box-shadow:0 0 2px rgba(0,0,0,0.2);
+			border-radius:40px;
+			height:20px;
+			width:20px;
+			line-height:20px;
+			display:block;
+			text-align:center;
+			font-size:20px;
+			margin-bottom:5px;
+			text-decoration:none;
+		}
+	#legend {
+		margin:0;
+		padding:20px 0 25px;
+		list-style:none;
+	}
+		#legend li {
+			float:left;
+			padding:1px 30px 2px 0;
+			font-size:13px;
+		}
+		/*#legend .high {background:#9d3d38;}
+		#legend .medium {background:#ca7b43;}
+		#legend .low {background:#f9b743;}
+		#legend .negative {background:#9bd6d7;}*/
+		#legend li svg {
+			margin:0 3px 0 0;
+			position:relative;
+			top:4px;
+		}
+		#legend .inactive {
+			opacity:0.4;
+		}
+	#moreInfo {
+		background:#bac2a5;
+		padding:10px 20px;
+		border:3px solid rgba(0,0,0,0.05);
+		border-width:3px 0;
+	}
+		#moreInfo h4 {
+			margin:0;
+			color:#495b4d;
+		}
+		#moreInfo p {
+			margin:5px 0 6px;
+		}
+	#sources {
+		padding-bottom:20px;
+	}
+		#sources p {
+			font-size:14px;
+		}
+
+/* ==========================================================================
+   Fonts list: for reference only. Switch from first list to second on publish:
+   ========================================================================== */
+/*
+localhost fonts-list {
+	font-family:'Trade Gothic Next W01'; - regular
+	font-family:'TradeGothicNextW01-Bold 693229'; - regular bold
+	font-family:'TradeGothicNextW01-Bold 693232'; - condensed bold
+	font-family:'TradeGothicNextW01-BdCm'; - compressed bold
+	font-family:'TradeGothicNextW01-Ligh 693250'; - light
+}
+rasmussen fonts-list {
+	font-family:"TradeGothicNextRegular";
+	font-family:"TradeGothicNextBold";
+	font-family:"TradeGothicNextCompressedBold";
+	font-family: "TradeGothicNextCondensedBold";
+	font-family:"TradeGothicNextBoldItalic";
+	font-family:"TradeGothicNextCondensed";
+	font-family:"TradeGothicNextHeavy";
+	font-family:"TradeGothicNextHeavyItalic";
+	font-family:"TradeGothicNextItalic"; 
+	font-family:"TradeGothicNextLight";
+	font-family:"TradeGothicNextLightItalic";
+	font-family:"TradeGothicNextCompressed";
+	font-family:"TradeGothicNextCompressedHeavy";
+	font-family:"TradeGothicNextCondensedBoldItalic";
+	font-family:"TradeGothicNextCondensedHeavy";
+	font-family:"TradeGothicNextCondensedHeavyItalic";
+	font-family:"TradeGothicNextCondensedItalic";
+}
+*/
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   Theses examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
