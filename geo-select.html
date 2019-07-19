@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>d3 Geo Select</title>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/topojson.v1.min.js"></script>
+  <script src="https://d3js.org/queue.v1.min.js"></script>
+  <style>
+#globe path {
+  cursor: pointer;
+}
+
+#globe:focus {
+  outline: none;
+}
+
+.titlebar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.title {
+  font-size: 24px;
+}
+
+.instructions {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.water {
+  fill: #97CACF;
+}
+
+.land {
+  fill: #FBF2CA;
+  stroke: #aaa;
+  stroke-width: 0.7px;
+}
+
+.land:hover {
+  fill: #EABA71;
+  stroke-width: 1px;
+}
+
+.focused {
+  fill: #EABA71;
+}
+
+.countryTooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 5px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 14px;
+  font-family: sans-serif;
+}
+  </style>
+ </head>
+<body>
+  <script>
+
+        const width = 600,
+            height = 500,
+            sens = 0.25;
+
+        //Set the projection
+        const projection = d3.geo.orthographic()
+            .scale(245)
+            .rotate([0, 0])
+            .translate([width / 2, height / 2])
+            .clipAngle(90);
+        const path = d3.geo.path().projection(projection);
+
+        // Build the globe DOM elements
+        const svg = d3.select('body').append('svg')
+            .attr('id', 'globe')
+            .attr('width', width)
+            .attr('height', height);
+
+        // Render water paths on the globe
+        svg.append('path')
+            .datum({ type: 'Sphere' })
+            .attr('class', 'water')
+            .attr('d', path);
+
+        // Add a tooltip to display country names on hover
+        const countryTooltip = d3.select('body').append('div').attr('class', 'countryTooltip');
+
+        // Load the required geo and country name data
+        queue()
+            .defer(d3.json, 'https://raw.githubusercontent.com/d3/d3.github.com/master/world-110m.v1.json')
+            .defer(d3.tsv, 'https://raw.githubusercontent.com/ruru-bootcamp-2018/D3-React/master/public/world-110m-country-names.tsv')
+            .await(ready);
+
+        function ready(error, world, countryData) {
+
+            const countries = topojson.feature(world, world.objects.countries).features;
+
+            // Build hash for looking up country names by id
+            const countryById = {};
+            countryData.forEach(function(d) {
+                countryById[ d.id ] = d.name;
+            });
+
+            // Render land paths on the globe
+            world = svg.selectAll('path.land')
+                .data(countries)
+                .enter().append('path')
+                .attr('class', 'land')
+                .attr('d', path)
+                .attr('id', d => d.id);
+
+            // Rerender globe on drag event
+            svg.selectAll('path').call(d3.behavior.drag()
+                .origin(function() {
+                    const r = projection.rotate();
+                    return { x: r[0] / sens, y: -r[1] / sens };
+                })
+                .on('drag', function() {
+                    const rotate = projection.rotate();
+                    projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+                    svg.selectAll('path.land').attr('d', path);
+                }));
+
+            // Country event handlers
+            svg.selectAll('path.land')
+                // Display country name in tooltip on hover
+                .on('mouseover', function(d) {
+                    countryTooltip.text( countryById[parseInt(d.id)] )
+                    .style('left', (d3.event.pageX + 7) + 'px')
+                    .style('top', (d3.event.pageY - 15) + 'px')
+                    .style('display', 'block')
+                    .style('opacity', 1);
+                })
+                // Hide country name tooltip on mouseout
+                .on('mouseout', function(d) {
+                    countryTooltip.style('opacity', 0)
+                        .style('display', 'none');
+                })
+                // Move country name tooltip with cursor
+                .on('mousemove', function(d) {
+                    countryTooltip.style('left', (d3.event.pageX + 7) + 'px')
+                        .style('top', (d3.event.pageY - 15) + 'px');
+                })
+
+                //Country click event handler
+                .on('click', function() {
+                    // If this is actually a drag event, do nothing.
+                    if (d3.event.defaultPrevented) return;
+
+                    // Set question response to selected country
+                    response = countryById[ this.getAttribute('id') ];
+
+                    // Clear previously applied response validation styling
+                    d3.select('.focused').classed('invalid', false)
+                        .classed('valid', false);
+
+                    const focusedCountry = countries.find(country => {
+                        return country.id === this.getAttribute('id');
+                    });
+                    const focusedCentroid = d3.geo.centroid( focusedCountry );
+
+                    //Globe rotating
+                    (function transition() {
+                        d3.transition()
+                        .duration(1000)
+                        .tween('rotate', function() {
+                            const r = d3.interpolate(
+                                projection.rotate(),
+                                [-focusedCentroid[0], -focusedCentroid[1]]
+                            );
+                            return function(t) {
+                                projection.rotate( r(t) );
+                                svg.selectAll('path').attr('d', path)
+                                    .classed('focused', d => d.id === focusedCountry.id);
+                            };
+                        });
+                    })();
+                });
+        };
+  </script>
+
+</body>
+</html>
