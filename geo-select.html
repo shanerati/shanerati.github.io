@@ -129,7 +129,7 @@
                     const rotate = projection.rotate();
                     projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
                     svg.selectAll('path.land').attr('d', path);
-                    d3.event.stopPropagation();
+                    d3.event.sourceEvent.stopPropagation();
                 }));
 
             // Country event handlers
